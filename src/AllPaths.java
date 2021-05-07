@@ -19,63 +19,8 @@ public class AllPaths {
                 graph[i][input[i][j]] = 1;
             }
         }
-        //print(graph);
         return graph;
     }
-
-//    public int[][] allPaths(int[][] input){
-//        graph = createGraph(input);
-//        for(int i = 0; i < graph[0].length; i++){
-//            ArrayList<Integer> path = new ArrayList<>();
-//            path.add(0);
-//            if(tryPath(path,0) == true){//first run at 0
-//                paths.add(path);
-//            }
-//        }
-//
-//        return (int[][])paths.toArray();
-//    }
-////
-//    private boolean tryPath(ArrayList<Integer> path, int parent){
-//        for(int i = 0; i < graph[parent].length; i++){
-//            if(graph[parent][i] == 1){
-//                int next = graph[parent][i];
-//                if(tryPath(path,next) == true) {
-//                    path.add(next);
-//                    return true;
-//                }
-//            }
-//
-//        }
-//
-//            return false;
-//    }
-
-//    public int[][] allPaths(int[][] input){
-//        graph = createGraph(input);
-//        ArrayList<Integer> path = new ArrayList<>();
-//        tryPath(graph,path,0);
-//        return (int[][])paths.toArray();
-//    }
-//
-//    public boolean tryPath(int[][] graph, ArrayList<Integer> prevPath, int current){
-//        System.out.println(prevPath.size());
-//        for(int j = current; j < graph[current].length; j++){//for each path 0 can take
-//            if(graph[0][j] == 1){//if 0 can take this path add it to this path
-//                ArrayList<Integer> path = prevPath;//create a new path continuing the last path
-//                path.add(j);//then continue on the next potential path...
-//                tryPath(graph,path,j);
-//                if(current == graph.length-1) {//if we are at the end we can package the path
-//                    paths.add(path);
-//                    return true;
-//                }
-//            }
-//
-//        }
-//        return false;
-//
-//    }
-
 
     /*
     *make sure paths is clear since its global to start a new graph
@@ -88,8 +33,6 @@ public class AllPaths {
         graph = createGraph(input);
         ArrayList prevPath = new ArrayList<>();
         tryPath(prevPath,0);
-//        System.out.println("PATHS:");
-//        System.out.println(paths.toString());
         return convertToIntArr(paths);
     }
 
@@ -102,14 +45,12 @@ public class AllPaths {
                 arrPaths[i][j] = paths.get(i).get(j);
             }
         }
-
         return arrPaths;
     }
 
     public boolean tryPath(ArrayList<Integer> prevPath, int current){
         ArrayList<Integer> path = (ArrayList)prevPath.clone(); //creates a clone of the previous path to continue
         path.add(current);
-
         for(int i = 0; i < graph[current].length; i++){
             if(graph[current][i] == 1){
                 if(i == graph.length-1) {//if we reach the target (end of path)
@@ -117,10 +58,8 @@ public class AllPaths {
                     paths.add(path);
                     return true;
                 }else {//else go again at the next path
-//                    path.add(i);
                     tryPath(path, i);
                 }
-
             }
         }
         return false;
